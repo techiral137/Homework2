@@ -1,0 +1,43 @@
+            SearchOption checkedOption = new SearchOption();
+            if(idCheck.Checked || nameCheck.Checked || jobCheck.Checked)
+            {
+                bool canSearchID = Int32.TryParse(Searchword.Text, out _);
+                if (canSearchID) 
+                {
+                    if (idCheck.Checked && nameCheck.Checked == false && jobCheck.Checked == false)
+                    {
+                        RegisterInfoGrid.DataSource = checkedOption.DataOutput(checkedOption.IDBoxChecked(), Searchword.Text);
+                    }
+                    else if (idCheck.Checked && jobCheck.Checked && nameCheck.Checked == false)
+                    {
+                        RegisterInfoGrid.DataSource = checkedOption.DataOutput(checkedOption.IDNJobBoxChecked(), Searchword.Text);
+                    }
+                    else if (nameCheck.Checked && idCheck.Checked && jobCheck.Checked == false)
+                    {
+                        RegisterInfoGrid.DataSource = checkedOption.DataOutput(checkedOption.NameNIDBoxChecked(), Searchword.Text);
+                    }
+                    else if (nameCheck.Checked && idCheck.Checked && jobCheck.Checked)
+                    {
+                        RegisterInfoGrid.DataSource = checkedOption.DataOutput(checkedOption.ALLBoxChecked(), Searchword.Text);
+                    }
+                }
+                else if (canSearchID == false)
+                {
+                    if (nameCheck.Checked && idCheck.Checked == false && jobCheck.Checked == false)
+                    {
+                        RegisterInfoGrid.DataSource = checkedOption.DataOutput(checkedOption.NameBoxChecked(), Searchword.Text);
+                    }
+                    else if (jobCheck.Checked && nameCheck.Checked == false && idCheck.Checked == false)
+                    {
+                        RegisterInfoGrid.DataSource = checkedOption.DataOutput(checkedOption.JobBoxChecked(), Searchword.Text);
+                    }
+                    else
+                    {
+                        RegisterInfoGrid.DataSource = checkedOption.DataOutput(checkedOption.NameNJobBoxChecked(), Searchword.Text);
+                    }
+                }
+            }
+            else
+            {
+                refresh();
+            }
